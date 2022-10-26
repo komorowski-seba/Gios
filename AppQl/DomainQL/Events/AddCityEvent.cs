@@ -2,4 +2,4 @@
 
 namespace DomainQl.Events;
 
-public record AddCityEvent(Guid Id, long CityId, string Name) : IEvent;
+public record AddCityEvent(Guid CommuneId, long CityId, string Name) : IEvent;

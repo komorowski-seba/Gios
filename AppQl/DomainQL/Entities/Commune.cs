@@ -1,10 +1,10 @@
-﻿using DomainQl.Common;
+﻿using DomainQL.Common.Exceptions;
 using DomainQl.Common.Interfaces;
 using DomainQl.Events;
 
 namespace DomainQl.Entities;
 
-public sealed class Commune : Entitie, IAggregate
+public sealed class Commune : IAggregate
 {
     private readonly List<City> _cities = new();
 
@@ -15,26 +15,24 @@ public sealed class Commune : Entitie, IAggregate
     public IReadOnlyCollection<City> Cities => _cities;
 
     private Commune() { }
-    
-    public Commune(string communeName, string districtName, string provinceName)
+
+    public Commune(AddCommuneEvent addCommuneEvent)
     {
-        if (string.IsNullOrEmpty(communeName)) throw new ArgumentNullException(nameof(communeName));
-        if (string.IsNullOrEmpty(districtName)) throw new ArgumentNullException(nameof(districtName));
-        if (string.IsNullOrEmpty(provinceName)) throw new ArgumentNullException(nameof(provinceName));
-        
-        Id = Guid.NewGuid();
-        CommuneName = communeName;
-        DistrictName = districtName;
-        ProvinceName = provinceName;
-        
-        AddEvent(new AddCommuneEvent(Id, CommuneName, DistrictName, ProvinceName));
+        Id = addCommuneEvent.Id;
+        CommuneName = addCommuneEvent.CommuneName;
+        DistrictName = addCommuneEvent.DistrictName;
+        ProvinceName = addCommuneEvent.ProvinceName;
     }
 
-    public City AddCityAsync(long cityId, string name)
+    public void Apply(AddCityEvent addCityEvent)
     {
-        var result = new City(cityId, name, Id);
-        _cities.Add(result);
-        AddEvent(new AddCityEvent(Id, cityId, name));
-        return result;
+        if (_cities.Any(n => n.Id == addCityEvent.CityId))
+            throw new CityExistException($"City: {addCityEvent.Name}; {addCityEvent.CityId}");
+        
+        _cities.Add(new City(addCityEvent.CityId, addCityEvent.Name));
+    }
+
+    public void Apply(AddStationEvent addStationEvent)
+    {
     }
 }
