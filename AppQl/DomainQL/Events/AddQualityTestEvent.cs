@@ -4,6 +4,7 @@ namespace DomainQl.Events;
 
 public record AddQualityTestEvent(
     Guid Id,
+    long CityId,
     long StationId,
     DateTimeOffset CalcDate,
     DateTimeOffset DownloadDate,

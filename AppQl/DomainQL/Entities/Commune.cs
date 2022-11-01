@@ -1,5 +1,4 @@
-﻿using DomainQL.Common.Exceptions;
-using DomainQl.Common.Interfaces;
+﻿using DomainQl.Common.Interfaces;
 using DomainQl.Events;
 
 namespace DomainQl.Entities;
@@ -27,12 +26,24 @@ public sealed class Commune : IAggregate
     public void Apply(AddCityEvent addCityEvent)
     {
         if (_cities.Any(n => n.Id == addCityEvent.CityId))
-            throw new CityExistException($"City: {addCityEvent.Name}; {addCityEvent.CityId}");
+            return;
         
         _cities.Add(new City(addCityEvent.CityId, addCityEvent.Name));
     }
 
     public void Apply(AddStationEvent addStationEvent)
     {
+        _cities
+            .FirstOrDefault(n => n.Id == addStationEvent.CityId)?
+            .AddStation(addStationEvent);
+    }
+
+    public void Apply(AddQualityTestEvent addQualityTestEvent)
+    {
+        _cities
+            .FirstOrDefault(n => n.Id == addQualityTestEvent.CityId)?
+            .Stations
+            .FirstOrDefault(n => n.Id == addQualityTestEvent.StationId)?
+            .SetCurrentQualityTests(addQualityTestEvent);
     }
 }

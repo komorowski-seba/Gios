@@ -1,13 +1,11 @@
-﻿using DomainQl.Common.Interfaces;
+﻿namespace DomainQl.Entities;
 
-namespace DomainQl.Entities;
-
-public sealed class AirQualityTest : IEntitie
+public sealed class AirQualityTest
 {
     public Guid Id { get; }
+    public long StationId { get; }
     public DateTimeOffset CalcDate { get; }
     public DateTimeOffset DownloadDate { get; }
-    public long StationId { get; }
     
     public int So2IndexLevel { get; }
     public string So2IndexName { get; }
@@ -20,8 +18,6 @@ public sealed class AirQualityTest : IEntitie
     public int O3IndexLevel { get; }
     public string O3IndexName { get; }
 
-    private AirQualityTest() { }
-        
     public AirQualityTest(
         long stationId,
         DateTimeOffset calcDate,
