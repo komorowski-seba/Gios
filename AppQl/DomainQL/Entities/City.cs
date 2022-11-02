@@ -10,8 +10,6 @@ public sealed class City
     public string Name { get; }
     public IReadOnlyCollection<Station> Stations => _stations;
 
-    private City() {}
-    
     public City(long id, string name)
     {
         Id = id;

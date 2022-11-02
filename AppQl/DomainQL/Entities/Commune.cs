@@ -3,7 +3,7 @@ using DomainQl.Events;
 
 namespace DomainQl.Entities;
 
-public sealed class Commune : IAggregate
+public sealed class Commune : IAggregate, IEquatable<Commune>
 {
     private readonly List<City> _cities = new();
 
@@ -46,4 +46,18 @@ public sealed class Commune : IAggregate
             .FirstOrDefault(n => n.Id == addQualityTestEvent.StationId)?
             .SetCurrentQualityTests(addQualityTestEvent);
     }
+
+    public bool Equals(Commune? other)
+    {
+        return other is not null  
+               && CommuneName.Equals(other.CommuneName)
+               && DistrictName.Equals(other.DistrictName)
+               && ProvinceName.Equals(other.ProvinceName);
+    }
+
+    public override bool Equals(object? obj)
+        => Equals(obj as Commune);
+
+    public override int GetHashCode()
+        => $"{CommuneName}_{DistrictName}_{ProvinceName}".GetHashCode(StringComparison.InvariantCulture);
 }

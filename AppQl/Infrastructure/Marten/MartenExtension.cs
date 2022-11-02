@@ -10,9 +10,7 @@ namespace Infrastructure.Marten;
 
 public static class MartenExtension
 {
-    public static IServiceCollection AddMartenServices(
-        this IServiceCollection services,
-        IConfiguration configuration)
+    public static IServiceCollection AddMartenServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddMarten(n =>
         {
