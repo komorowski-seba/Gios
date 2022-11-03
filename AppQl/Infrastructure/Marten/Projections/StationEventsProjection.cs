@@ -1,6 +1,4 @@
-﻿using Domain.Events;
-using Domain.StorageEvents;
-using Marten.Events.Aggregation;
+﻿using Marten.Events.Aggregation;
 
 namespace Infrastructure.Marten.Projections;
 

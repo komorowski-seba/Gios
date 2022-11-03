@@ -15,20 +15,20 @@ public sealed class Commune : IAggregate, IEquatable<Commune>
 
     private Commune() { }
 
-    public Commune(AddCommuneEvent addCommuneEvent)
+    public Commune(AddCommuneEvent @event)
     {
-        Id = addCommuneEvent.Id;
-        CommuneName = addCommuneEvent.CommuneName;
-        DistrictName = addCommuneEvent.DistrictName;
-        ProvinceName = addCommuneEvent.ProvinceName;
+        Id = @event.Id;
+        CommuneName = @event.CommuneName;
+        DistrictName = @event.DistrictName;
+        ProvinceName = @event.ProvinceName;
     }
 
-    public void Apply(AddCityEvent addCityEvent)
+    public void ApplyAddCityEvent(AddCityEvent @event)
     {
-        if (_cities.Any(n => n.Id == addCityEvent.CityId))
+        if (_cities.Any(n => n.Id == @event.CityId))
             return;
         
-        _cities.Add(new City(addCityEvent.CityId, addCityEvent.Name));
+        _cities.Add(new City(@event.CityId, @event.Name));
     }
 
     public void Apply(AddStationEvent addStationEvent)
