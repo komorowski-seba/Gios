@@ -15,7 +15,7 @@ public sealed class MartensEventsStoreDb : IEventsStoreDb
 
     public async Task AppendEventAsync(IEvent evt, CancellationToken cancellationToken)
     {
-        _documentSession.Events.Append(evt.Id, evt);
+        _documentSession.Events.Append(evt.CommuneId, evt);
         await _documentSession.SaveChangesAsync(cancellationToken);
     }
 }

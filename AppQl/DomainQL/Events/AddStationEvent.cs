@@ -3,10 +3,11 @@
 namespace DomainQl.Events;
 
 public record AddStationEvent(
-    Guid Id, 
+    Guid CommuneId, 
     long CityId,
     long StationId,
     string StationName,
     string GegrLat,
     string GegrLon,
-    string AddressStreet) : IEvent;
+    string AddressStreet) 
+    : IEvent;

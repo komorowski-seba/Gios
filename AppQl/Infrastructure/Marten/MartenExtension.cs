@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces;
+using Application.Options;
 using Infrastructure.Marten.Projections;
 using Infrastructure.Marten.Services;
 using Marten;
@@ -12,6 +13,8 @@ public static class MartenExtension
 {
     public static IServiceCollection AddMartenServices(this IServiceCollection services, IConfiguration configuration)
     {
+        // configuration.GetSection($"Marten:{nameof(MartenOptions.DBSchemaName)}")
+        
         services.AddMarten(n =>
         {
             n.Connection(configuration.GetConnectionString("Marten"));
@@ -19,7 +22,6 @@ public static class MartenExtension
             n.DatabaseSchemaName = "Gios_db";
             n.Events.DatabaseSchemaName = "Gios_events";
             
-            // n.Projections.Add<StationEventsProjection>();
             n.Projections.Add<CommuneProjection>();
         });
         services.AddScoped<IEventsStoreDb, MartensEventsStoreDb>();

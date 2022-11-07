@@ -24,9 +24,5 @@
     <ItemGroup>
       <ProjectReference Include="..\DomainQL\DomainQL.csproj" />
     </ItemGroup>
-    
-    <ItemGroup>
-      <Folder Include="Options" />
-    </ItemGroup>
 
 </Project>

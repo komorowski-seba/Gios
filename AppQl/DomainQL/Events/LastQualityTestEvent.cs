@@ -2,8 +2,8 @@
 
 namespace DomainQl.Events;
 
-public record AddQualityTestEvent(
-    Guid Id,
+public record LastQualityTestEvent(
+    Guid CommuneId,
     long CityId,
     long StationId,
     DateTimeOffset CalcDate,
@@ -17,4 +17,5 @@ public record AddQualityTestEvent(
     int Pm25IndexLevel,
     string Pm25IndexName,
     int O3IndexLevel,
-    string O3IndexName) : IEvent;
+    string O3IndexName) 
+    : IEvent;

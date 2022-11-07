@@ -3,7 +3,8 @@
 namespace DomainQl.Events;
 
 public record AddCommuneEvent(
-    Guid Id,
+    Guid CommuneId,
     string CommuneName, 
     string DistrictName, 
-    string ProvinceName) : IEvent;
+    string ProvinceName) 
+    : IEvent;

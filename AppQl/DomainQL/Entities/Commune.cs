@@ -31,20 +31,20 @@ public sealed class Commune : IAggregate, IEquatable<Commune>
         _cities.Add(new City(@event.CityId, @event.Name));
     }
 
-    public void Apply(AddStationEvent addStationEvent)
+    public void ApplyAddStationEvent(AddStationEvent @event)
     {
         _cities
-            .FirstOrDefault(n => n.Id == addStationEvent.CityId)?
-            .AddStation(addStationEvent);
+            .FirstOrDefault(n => n.Id == @event.CityId)?
+            .AddStation(@event);
     }
 
-    public void Apply(AddQualityTestEvent addQualityTestEvent)
+    public void ApplyLastQualityTestEvent(LastQualityTestEvent lastQualityTestEvent)
     {
         _cities
-            .FirstOrDefault(n => n.Id == addQualityTestEvent.CityId)?
+            .FirstOrDefault(n => n.Id == lastQualityTestEvent.CityId)?
             .Stations
-            .FirstOrDefault(n => n.Id == addQualityTestEvent.StationId)?
-            .SetCurrentQualityTests(addQualityTestEvent);
+            .FirstOrDefault(n => n.Id == lastQualityTestEvent.StationId)?
+            .SetCurrentQualityTests(lastQualityTestEvent);
     }
 
     public bool Equals(Commune? other)

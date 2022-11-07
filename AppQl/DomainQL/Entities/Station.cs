@@ -27,7 +27,7 @@ public sealed class Station
         AddressStreet = string.IsNullOrEmpty(addressStreet) ? string.Empty : addressStreet;
     }
 
-    public void SetCurrentQualityTests(AddQualityTestEvent qualityTestEvent)
+    public void SetCurrentQualityTests(LastQualityTestEvent qualityTestEvent)
     {
         QualityTests = new AirQualityTest(
             qualityTestEvent.StationId,
