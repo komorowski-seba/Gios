@@ -13,14 +13,12 @@ public static class MartenExtension
 {
     public static IServiceCollection AddMartenServices(this IServiceCollection services, IConfiguration configuration)
     {
-        // configuration.GetSection($"Marten:{nameof(MartenOptions.DBSchemaName)}")
-        
         services.AddMarten(n =>
         {
             n.Connection(configuration.GetConnectionString("Marten"));
             n.AutoCreateSchemaObjects = AutoCreate.CreateOrUpdate;
-            n.DatabaseSchemaName = "Gios_db";
-            n.Events.DatabaseSchemaName = "Gios_events";
+            n.DatabaseSchemaName = configuration.GetSection($"Marten:{nameof(MartenOptions.DBSchemaName)}").Value;
+            n.Events.DatabaseSchemaName = configuration.GetSection($"Marten:{nameof(MartenOptions.EventSchemaName)}").Value;
             
             n.Projections.Add<CommuneProjection>();
         });

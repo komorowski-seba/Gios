@@ -1,9 +1,8 @@
-﻿using DomainQl.Common.Interfaces;
-using DomainQl.Events;
+﻿using DomainQl.Events;
 
 namespace DomainQl.Entities;
 
-public sealed class Commune : IAggregate, IEquatable<Commune>
+public sealed class Commune : IEquatable<Commune>
 {
     private readonly List<City> _cities = new();
 
@@ -17,7 +16,7 @@ public sealed class Commune : IAggregate, IEquatable<Commune>
 
     public Commune(AddCommuneEvent @event)
     {
-        Id = @event.Id;
+        Id = @event.CommuneId;
         CommuneName = @event.CommuneName;
         DistrictName = @event.DistrictName;
         ProvinceName = @event.ProvinceName;

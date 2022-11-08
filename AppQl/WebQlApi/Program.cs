@@ -1,16 +1,14 @@
 using Application;
-using ApplicationQlApp.ExternalEvents;
-using ApplicationQlApp.InternalEvents;
-using ApplicationQlApp.Mediator;
+using Application.Options;
 using Infrastructure;
-using Infrastructure.Elastic;
-using Infrastructure.Persistence;
-using Infrastructure.QL;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseConfigSeriLog(builder.Configuration, builder.Environment.EnvironmentName);
 
 var services = builder.Services;
+
+services.Configure<MartenOptions>(builder.Configuration.GetSection("Marten"));
+
 services.AddControllers();
 services.AddEndpointsApiExplorer();
 services.AddApplicationServices();
