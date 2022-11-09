@@ -1,9 +1,16 @@
-﻿using Application.Models.GiosStation;
-using MediatR;
+﻿using MediatR;
 
 namespace Application.Mediator.Command;
 
-public class AddStationCommand : INotification
+public sealed class AddStationCommand : INotification
 {
-    public Station NewStation { get; set; }
+    // public Station NewStation { get; set; }
+}
+
+public sealed class AddStationCommandHandler : INotificationHandler<AddStationCommand>
+{
+    public async Task Handle(AddStationCommand notification, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
 }
