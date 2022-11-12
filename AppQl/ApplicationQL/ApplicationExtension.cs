@@ -1,5 +1,5 @@
-﻿using Application.Interfaces;
-using Application.Services;
+﻿using System.Reflection;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application;
@@ -8,7 +8,7 @@ public static class ApplicationExtension
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
-        services.AddScoped<IStationService, StationService>();
+        services.AddMediatR(Assembly.GetExecutingAssembly());
         return services;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces;
 using DomainQl.Common.Interfaces;
 using Marten;
+using MediatR;
 
 namespace Infrastructure.Marten.Services;
 
