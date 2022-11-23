@@ -22,8 +22,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\ApplicationGios\ApplicationGios.csproj" />
-      <ProjectReference Include="..\HandlersHangfireApp\HandlersHangfireApp.csproj" />
-      <ProjectReference Include="..\HangfireInfrastructure\HangfireInfrastructure.csproj" />
       <ProjectReference Include="..\InfrastructureGios\InfrastructureGios.csproj" />
     </ItemGroup>
     

@@ -2,6 +2,18 @@ version: '2'
 
 services:
   
+  dapr_for_hangfire_app:
+    image: daprio/daprd:edge
+    container_name: dapr_hangfire_app
+    command:
+      - app-id:service_for_hangfire_app
+      - app-port:8998
+      - "components-path:/components"
+      - log-level:debug
+    volumes:
+      - "./components/:/components"
+        
+  
   elastic_search_2:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.9.2
     container_name: elastic_search_2

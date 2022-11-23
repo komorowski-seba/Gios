@@ -11,7 +11,7 @@
         <PackageReference Include="Hangfire.AspNetCore" Version="1.7.19" />
         <PackageReference Include="Hangfire.Autofac.Core" Version="1.0.1" />
         <PackageReference Include="Hangfire.Core" Version="1.7.19" />
-        <PackageReference Include="Hangfire.Dashboard.Authorization" Version="1.7.19" />
+        <PackageReference Include="Hangfire.Dashboard.Authorization" Version="2.1.0" />
         <PackageReference Include="Hangfire.SqlServer" Version="1.7.19" />
         <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
         <PackageReference Include="Serilog.Sinks.ElasticSearch" Version="8.4.1" />
@@ -32,7 +32,7 @@
     </ItemGroup>
     
     <ItemGroup>
-      <ProjectReference Include="..\..\Shareed\Shareed.csproj" />
+<!--      <ProjectReference Include="..\..\Shareed\Shareed.csproj" />-->
       <ProjectReference Include="..\ApplicationGios\ApplicationGios.csproj" />
     </ItemGroup>
 
