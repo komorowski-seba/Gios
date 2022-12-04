@@ -27,8 +27,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\ApplicationQL\ApplicationQL.csproj" />
-      <ProjectReference Include="..\Application\Application.csproj" />
-      <ProjectReference Include="..\Domain\Domain.csproj" />
+      <ProjectReference Include="..\DomainQL\DomainQL.csproj" />
     </ItemGroup>
     
 </Project>

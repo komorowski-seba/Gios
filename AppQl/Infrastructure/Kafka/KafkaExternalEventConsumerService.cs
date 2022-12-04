@@ -1,5 +1,4 @@
-﻿using Application.Extensions;
-using Application.Interfaces;
+﻿using Application.Interfaces;
 using Confluent.Kafka;
 using MediatR;
 using Microsoft.Extensions.Configuration;
@@ -35,14 +34,14 @@ public class KafkaExternalEventConsumerService<T> : BackgroundService
     {
         var consumerConfig = new ConsumerConfig
         {
-            BootstrapServers = _configuration.GetSettingsKafkaBootstrapServer(),
+            // BootstrapServers = _configuration.GetSettingsKafkaBootstrapServer(),
             AutoOffsetReset = AutoOffsetReset.Earliest,
             EnableAutoCommit = true,
             GroupId = Guid.NewGuid().ToString()
         };
         
         using var consumer = new ConsumerBuilder<string, string>(consumerConfig).Build();
-        consumer.Subscribe( _configuration.GetSettingsKafkaTopic());
+        // consumer.Subscribe( _configuration.GetSettingsKafkaTopic());
         
         _logger.LogInformation("Start {Name}:{TypeName}", GetType().Name, typeof(T).Name);
         while (!stoppingToken.IsCancellationRequested)
