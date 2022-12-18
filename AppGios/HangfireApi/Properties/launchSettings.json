@@ -17,6 +17,16 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
+    "Dapr": {
+      "commandName": "Executable",
+      "executablePath": "dapr",
+      "commandLineArgs": "run --app-id Dapr_Test --components-path $(MSBuildProjectDirectory)/components/ --dapr-http-port 3500 -- dotnet run --no-build",
+      "workingDirectory": "../../../",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "nativeDebugging": true
+    },
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
