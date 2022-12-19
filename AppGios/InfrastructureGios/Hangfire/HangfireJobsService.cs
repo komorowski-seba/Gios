@@ -17,12 +17,12 @@ public class HangfireJobsService : IHangfireJobsService
     [JobDisplayName("AllStationsJob_{0}"), AutomaticRetry(Attempts = 0)]
     public void AllStationJob()
     {
-        _mediator.Publish(new NewStationCommand()).Wait();
+        // _mediator.Publish(new NewStationCommand()).Wait();
     }
 
     [JobDisplayName("AllStationsStatus_{0}"), AutomaticRetry(Attempts = 0)]
     public void AllStationsStatusJob()
     {
-        _mediator.Publish(new CheckStationStatusCommand()).Wait();
+        // _mediator.Publish(new CheckStationStatusCommand()).Wait();
     }
 }

@@ -14,16 +14,16 @@ public static class InfrastructureExtension
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        services.AddHangfireServices(configuration);
+        // services.AddHangfireServices(configuration);
         services.AddGiosServices();
-        services.AddKafkaPublishServices(configuration);
-        services.AddRedisServices(configuration);
+        // services.AddKafkaPublishServices(configuration);
+        // services.AddRedisServices(configuration);
         return services;
     }
 
     public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app)
     {
-        app.UseHangfireConfiguration();
+        // app.UseHangfireConfiguration();
         return app;
     }
 

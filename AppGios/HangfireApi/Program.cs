@@ -16,14 +16,12 @@ services.Configure<KafkaOpions>(builder.Configuration.GetSection("Kafka"));
 services.AddEndpointsApiExplorer(); 
 services.AddInfrastructureServices(builder.Configuration);
 services.AddDaprClient();
-// services.AddApplicationHangfireServices();
 
 
 var app = builder.Build();
 app.UseHttpsRedirection();
 app.UseInfrastructure();
 app.UseRouting();
-// app.UseHangfireInfrastructure();
 
 app.UseCloudEvents();
 app.UseEndpoints(e =>
