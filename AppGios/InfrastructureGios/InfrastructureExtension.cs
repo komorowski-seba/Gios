@@ -1,4 +1,5 @@
-﻿using InfrastructureGios.Gios;
+﻿using InfrastructureGios.Dapr;
+using InfrastructureGios.Gios;
 using InfrastructureGios.Hangfire;
 using InfrastructureGios.Kafka;
 using InfrastructureGios.Redis;
@@ -18,12 +19,14 @@ public static class InfrastructureExtension
         services.AddGiosServices();
         // services.AddKafkaPublishServices(configuration);
         // services.AddRedisServices(configuration);
+        services.AddDaprServices();
         return services;
     }
 
     public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app)
     {
         // app.UseHangfireConfiguration();
+        app.UseDaprConfiguration();
         return app;
     }
 

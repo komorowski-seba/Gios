@@ -15,7 +15,7 @@ services.Configure<KafkaOpions>(builder.Configuration.GetSection("Kafka"));
 
 services.AddEndpointsApiExplorer(); 
 services.AddInfrastructureServices(builder.Configuration);
-services.AddDaprClient();
+
 
 
 var app = builder.Build();
@@ -23,7 +23,7 @@ app.UseHttpsRedirection();
 app.UseInfrastructure();
 app.UseRouting();
 
-app.UseCloudEvents();
+
 app.UseEndpoints(e =>
 {
     e.MapSubscribeHandler();
