@@ -15,7 +15,7 @@ public static class InfrastructureExtension
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        // services.AddHangfireServices(configuration);
+        services.AddHangfireServices(configuration);
         services.AddGiosServices();
         // services.AddKafkaPublishServices(configuration);
         // services.AddRedisServices(configuration);
@@ -25,9 +25,19 @@ public static class InfrastructureExtension
 
     public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app)
     {
-        // app.UseHangfireConfiguration();
+        app.UseHangfireConfiguration();
         app.UseDaprConfiguration();
         return app;
     }
 
 }
+
+// var state = JsonConvert.SerializeObject(new Hey
+// {
+//     Aaa = "abc",
+//     Bbb = "Bbb"
+// });
+//     
+// var client = new DaprClientBuilder().Build();
+// await client.SaveStateAsync("statestore", Guid.NewGuid().ToString(), state);
+// return " Next test ";

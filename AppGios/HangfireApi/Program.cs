@@ -1,4 +1,5 @@
 
+using ApplicationGios;
 using ApplicationGios.Options;
 using InfrastructureGios;
 using Shareed.Extensions;
@@ -13,6 +14,7 @@ services.Configure<GiosOptions>(builder.Configuration.GetSection("Gios"));
 services.Configure<RedisOptions>(builder.Configuration.GetSection("Redis"));
 services.Configure<KafkaOpions>(builder.Configuration.GetSection("Kafka"));
 
+services.ApplicationGiosServices();
 services.AddEndpointsApiExplorer(); 
 services.AddInfrastructureServices(builder.Configuration);
 

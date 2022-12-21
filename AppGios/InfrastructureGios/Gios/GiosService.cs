@@ -1,8 +1,10 @@
-﻿using ApplicationGios.Extensions;
+﻿using System.Net;
+using ApplicationGios.Extensions;
 using ApplicationGios.Interfaces;
 using ApplicationGios.Options;
 using DomainGios.Entities;
 using Microsoft.Extensions.Options;
+using Polly;
 using RestSharp;
 using Shareed.Models;
 
@@ -11,6 +13,10 @@ namespace InfrastructureGios.Gios;
 public sealed class GiosService : IGiosService
 {
     private GiosOptions _giosOptions;
+    private IAsyncPolicy<IRestResponse<string>> asyncPolicy = Policy<IRestResponse<string>>
+            .Handle<HttpRequestException>()
+            .OrResult(n => n.StatusCode is >= HttpStatusCode.InternalServerError or HttpStatusCode.RequestTimeout)
+            .WaitAndRetryAsync(10, i => TimeSpan.FromSeconds(i + 2));
     
     public GiosService(IOptions<GiosOptions> giosOptions)
     {
@@ -21,12 +27,16 @@ public sealed class GiosService : IGiosService
     {
         var client = new RestClient(_giosOptions.StationsUrl ?? throw new NullReferenceException(nameof(_giosOptions.StationsUrl)));
         var request = new RestRequest(Method.GET);
-        var response = await client.GetAsync<IRestResponse<IList<Station>>>(request, cancellationToken);
+        // var response = await client.GetAsync<string>(request, cancellationToken);
         
-        if (!response.IsSuccessful)
-            throw new HttpRequestException(response.ErrorException?.Message ?? string.Empty);
-            
-        return response.Data;
+        var i = await asyncPolicy
+            .ExecuteAsync(async () => await client.GetAsync<IRestResponse<string>>(request, cancellationToken).ConfigureAwait(false))
+            .ConfigureAwait(false);
+        
+        // if (!response.IsSuccessful)
+        //     throw new HttpRequestException(response.ErrorException?.Message ?? string.Empty);
+        return new List<Station>();
+        // return response.Data;
     }
 
     public async Task<IEnumerable<AirQualityIndexModel>> GetStationAirQuality(long stationId)
