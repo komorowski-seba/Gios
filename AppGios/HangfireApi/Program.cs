@@ -18,8 +18,6 @@ services.ApplicationGiosServices();
 services.AddEndpointsApiExplorer(); 
 services.AddInfrastructureServices(builder.Configuration);
 
-
-
 var app = builder.Build();
 app.UseHttpsRedirection();
 app.UseInfrastructure();

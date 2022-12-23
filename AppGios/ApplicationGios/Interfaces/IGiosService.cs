@@ -5,6 +5,6 @@ namespace ApplicationGios.Interfaces;
 
 public interface IGiosService
 {
-    Task<IList<Station>?> GetAllStations(CancellationToken cancellationToken);
-    Task<IEnumerable<AirQualityIndexModel>> GetStationAirQuality(long stationId);
+    Task<IList<Station>> GetAllStationsAsync(CancellationToken cancellationToken);
+    Task<IEnumerable<AirQualityIndexModel>> GetStationAirQualityAsync(long stationId, CancellationToken cancellationToken);
 }
