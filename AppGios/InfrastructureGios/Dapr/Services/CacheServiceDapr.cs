@@ -1,18 +1,35 @@
-﻿using System.Text;
-using ApplicationGios.Extensions;
-using ApplicationGios.Interfaces;
+﻿using ApplicationGios.Interfaces;
 using ApplicationGios.Models.Gios;
-using ApplicationGios.Options;
 using DomainGios.Entities;
-using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using Shareed.Models;
 
-namespace InfrastructureGios.Redis;
+namespace InfrastructureGios.Dapr.Services;
 
-public sealed class RedisCacheService : ICacheService
+public class CacheServiceDapr : ICacheService
 {
+    public async Task CacheStationsAsync(IEnumerable<Station> stations, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<bool> CacheAirQualityIndexAsync(AirQualityIndexModel airQualityIndex, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<List<GiosStationCacheModel>> GetAllStationsAsync(CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<AirQualityIndexModel?> GetLastAirQualityIndexAsync(long stationId, string airQualityType, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+/*
+
     private const string KeyStation = "key_station";
     private const string KeyAirQuality = "key_air_quality";
     
@@ -84,4 +101,6 @@ public sealed class RedisCacheService : ICacheService
         var stationToByte = Encoding.ASCII.GetBytes(serializeData);
         return stationToByte;
     }
-}
+
+
+*/

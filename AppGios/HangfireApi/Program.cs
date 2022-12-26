@@ -7,7 +7,7 @@ using Shareed.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseConfigSeriLog(builder.Configuration, builder.Environment.EnvironmentName);
 
-// change to autofac
+// todo change to autofac
 var services = builder.Services;
 
 services.Configure<GiosOptions>(builder.Configuration.GetSection("Gios"));
@@ -29,6 +29,8 @@ app.UseEndpoints(e =>
     e.MapSubscribeHandler();
 });
 
-app.MapGet("/", (HttpContext context) 
-    => $" Hangfire - https://{context.Response.HttpContext.Request.Host.Host}:{context.Response.HttpContext.Request.Host.Port}/Hangfire");
+app.MapGet(
+    "/", 
+    (HttpContext context) 
+        => $" Hangfire - https://{context.Response.HttpContext.Request.Host.Host}:{context.Response.HttpContext.Request.Host.Port}/Hangfire");
 app.Run();

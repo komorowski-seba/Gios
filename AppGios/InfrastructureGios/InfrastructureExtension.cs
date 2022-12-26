@@ -1,8 +1,6 @@
 ﻿using InfrastructureGios.Dapr;
 using InfrastructureGios.Gios;
 using InfrastructureGios.Hangfire;
-using InfrastructureGios.Kafka;
-using InfrastructureGios.Redis;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
