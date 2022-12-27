@@ -11,7 +11,7 @@ builder.Host.UseConfigSeriLog(builder.Configuration, builder.Environment.Environ
 var services = builder.Services;
 
 services.Configure<GiosOptions>(builder.Configuration.GetSection("Gios"));
-services.Configure<RedisOptions>(builder.Configuration.GetSection("Redis"));
+services.Configure<DaprOptions>(builder.Configuration.GetSection("Dapr"));
 services.Configure<KafkaOpions>(builder.Configuration.GetSection("Kafka"));
 
 services.ApplicationGiosServices();

@@ -1,15 +1,31 @@
-﻿using ApplicationGios.Interfaces;
+﻿using ApplicationGios.Extensions;
+using ApplicationGios.Interfaces;
 using ApplicationGios.Models.Gios;
+using ApplicationGios.Options;
+using Dapr.Client;
 using DomainGios.Entities;
+using Microsoft.Extensions.Options;
 using Shareed.Models;
 
 namespace InfrastructureGios.Dapr.Services;
 
 public class CacheServiceDapr : ICacheService
 {
+    private const string KeysStation = "keys_station";
+    private const string KeyAirQuality = "key_air_quality";
+    private readonly DaprClient _daprClient;
+    private readonly DaprOptions _daprOptions;
+
+    public CacheServiceDapr(DaprClient daprClient, IOptions<DaprOptions> daprOptions)
+    {
+        _daprClient = daprClient;
+        _daprOptions = daprOptions.Value;
+    }
+
     public async Task CacheStationsAsync(IEnumerable<Station> stations, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var allStations = stations.Select(n => n.ToStationCache()).ToList();
+        await _daprClient.SaveStateAsync(_daprOptions.StoryName, KeysStation, allStations, cancellationToken: cancellationToken);
     }
 
     public async Task<bool> CacheAirQualityIndexAsync(AirQualityIndexModel airQualityIndex, CancellationToken cancellationToken)
@@ -19,7 +35,8 @@ public class CacheServiceDapr : ICacheService
 
     public async Task<List<GiosStationCacheModel>> GetAllStationsAsync(CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var result = await _daprClient.GetStateAsync<List<GiosStationCacheModel>>(_daprOptions.StoryName, KeysStation, cancellationToken: cancellationToken);
+        return result ?? new List<GiosStationCacheModel>();
     }
 
     public async Task<AirQualityIndexModel?> GetLastAirQualityIndexAsync(long stationId, string airQualityType, CancellationToken cancellationToken)
@@ -30,8 +47,6 @@ public class CacheServiceDapr : ICacheService
 
 /*
 
-    private const string KeyStation = "key_station";
-    private const string KeyAirQuality = "key_air_quality";
     
     private readonly IDistributedCache _distributedCache;
     private readonly RedisOptions _redisOptions;
@@ -42,21 +57,6 @@ public class CacheServiceDapr : ICacheService
         _redisOptions = redisOptions.Value;
     }
 
-    public async Task CacheStationsAsync(IEnumerable<Station> stations, CancellationToken cancellationToken)
-    {
-        var stationsCase = stations.Select(n => n.ToStationCache()).ToList();
-        var allStationCase = await GetAllStationsAsync(cancellationToken);
-        var difference = stationsCase.Except(allStationCase).ToList();
-        
-        if (!difference.Any())
-            return;
-        
-        allStationCase.AddRange(difference);
-        await _distributedCache.SetAsync(
-            $"{_redisOptions.VariableKey}_{KeyStation}", 
-            SerializeData(allStationCase), 
-            cancellationToken);
-    }
 
     public async Task<List<GiosStationCacheModel>> GetAllStationsAsync(CancellationToken cancellationToken)
     {

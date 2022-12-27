@@ -13,8 +13,8 @@ public sealed class NewStationCommand : INotification
 public sealed class NewStationHandler : INotificationHandler<NewStationCommand>
 {
     private readonly IGiosService _giosService;
-    // private readonly IExternalEventService<NewStationExtEvent> _externalEventService;
     private readonly ICacheService _cacheService;
+    // private readonly IExternalEventService<NewStationExtEvent> _externalEventService;
 
     public NewStationHandler(
         IGiosService giosService, 
@@ -22,8 +22,8 @@ public sealed class NewStationHandler : INotificationHandler<NewStationCommand>
         ICacheService cacheService)
     {
         _giosService = giosService;
-        // _externalEventService = externalEventService;
         _cacheService = cacheService;
+        // _externalEventService = externalEventService;
     }
 
     public async Task Handle(NewStationCommand notification, CancellationToken cancellationToken)
