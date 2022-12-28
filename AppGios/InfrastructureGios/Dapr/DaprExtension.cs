@@ -11,6 +11,7 @@ public static class DaprExtension
     {
         services.AddDaprClient();
         services.AddScoped<ICacheService, CacheServiceDapr>();
+        services.AddScoped<IPubMsgService, PubMsgServiceDapr>();
         return services;
     }
 

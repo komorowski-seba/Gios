@@ -1,25 +1,10 @@
-﻿using ApplicationGios.Models.Gios;
-using DomainGios.Entities;
+﻿using DomainGios.Entities;
 using Shareed.Models;
 
 namespace ApplicationGios.Extensions;
 
 public static class GiosExtension
 {
-    public static GiosStationCacheModel ToStationCache(this Station station)
-    {
-        var result = new GiosStationCacheModel
-        {
-            Id = station.Id,
-            GegrLat = station.GegrLat,
-            GegrLon = station.GegrLon,
-            StationName = station.StationName,
-            City = station.City?.Name ?? string.Empty,
-            Province = station.City?.Commune?.ProvinceName ?? string.Empty 
-        };
-        return result;
-    }
-
     public static StationModel ToSationModel(this Station station)
     {
         var result = new StationModel

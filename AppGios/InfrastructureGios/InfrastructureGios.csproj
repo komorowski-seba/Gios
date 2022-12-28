@@ -33,10 +33,6 @@
     </ItemGroup>
     
     <ItemGroup>
-      <Folder Include="Extensions" />
-    </ItemGroup>
-    
-    <ItemGroup>
       <ProjectReference Include="..\..\Shareed\Shareed.csproj" />
       <ProjectReference Include="..\ApplicationGios\ApplicationGios.csproj" />
     </ItemGroup>

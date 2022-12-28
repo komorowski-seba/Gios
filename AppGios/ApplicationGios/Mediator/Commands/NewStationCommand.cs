@@ -1,8 +1,5 @@
-﻿using ApplicationGios.Extensions;
-using ApplicationGios.Interfaces;
+﻿using ApplicationGios.Interfaces;
 using MediatR;
-using Shareed.Events;
-using Shareed.Interfaces;
 
 namespace ApplicationGios.Mediator.Commands;
 
@@ -14,25 +11,22 @@ public sealed class NewStationHandler : INotificationHandler<NewStationCommand>
 {
     private readonly IGiosService _giosService;
     private readonly ICacheService _cacheService;
-    // private readonly IExternalEventService<NewStationExtEvent> _externalEventService;
+    private readonly IPubMsgService _pubMsgService;
 
-    public NewStationHandler(
-        IGiosService giosService, 
-        // IExternalEventService<NewStationExtEvent> externalEventService, 
-        ICacheService cacheService)
+    public NewStationHandler(IGiosService giosService, ICacheService cacheService, IPubMsgService pubMsgService)
     {
         _giosService = giosService;
         _cacheService = cacheService;
-        // _externalEventService = externalEventService;
+        _pubMsgService = pubMsgService;
     }
 
     public async Task Handle(NewStationCommand notification, CancellationToken cancellationToken)
     {
         var allStations = await _giosService.GetAllStationsAsync(cancellationToken);
         await _cacheService.CacheStationsAsync(allStations, cancellationToken);
-        // foreach (var station in allStations)
-        // {
-        //     await _externalEventService.Publish(new NewStationExtEvent {NewStation = station.ToSationModel()});
-        // }
+        foreach (var station in allStations)
+        {
+            await _pubMsgService.PublishStationAsync(station, cancellationToken);
+        }
     }
 }

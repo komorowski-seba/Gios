@@ -27,7 +27,7 @@ public sealed class GiosService : IGiosService
         _giosOptions = giosOptions.Value;
     }
     
-    public async Task<IList<Station>> GetAllStationsAsync(CancellationToken cancellationToken)
+    public async Task<IList<StationModel>> GetAllStationsAsync(CancellationToken cancellationToken)
     {
         var client = new RestClient(_giosOptions.StationsUrl ?? throw new NullReferenceException(nameof(_giosOptions.StationsUrl)));
         var request = new RestRequest(Method.GET);
@@ -38,7 +38,8 @@ public sealed class GiosService : IGiosService
         
         if (!response.IsSuccessful)
             throw new HttpRequestException(response.ErrorException?.Message ?? string.Empty);
-        return response.Data;
+        var result = response.Data.Select(n => n.ToSationModel()).ToList();
+        return result;
     }
 
     public async Task<IEnumerable<AirQualityIndexModel>> GetStationAirQualityAsync(long stationId, CancellationToken cancellationToken)

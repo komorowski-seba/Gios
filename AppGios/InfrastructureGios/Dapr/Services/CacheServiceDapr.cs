@@ -1,9 +1,6 @@
-﻿using ApplicationGios.Extensions;
-using ApplicationGios.Interfaces;
-using ApplicationGios.Models.Gios;
+﻿using ApplicationGios.Interfaces;
 using ApplicationGios.Options;
 using Dapr.Client;
-using DomainGios.Entities;
 using Microsoft.Extensions.Options;
 using Shareed.Models;
 
@@ -22,10 +19,9 @@ public class CacheServiceDapr : ICacheService
         _daprOptions = daprOptions.Value;
     }
 
-    public async Task CacheStationsAsync(IEnumerable<Station> stations, CancellationToken cancellationToken)
+    public async Task CacheStationsAsync(IEnumerable<StationModel> stations, CancellationToken cancellationToken)
     {
-        var allStations = stations.Select(n => n.ToStationCache()).ToList();
-        await _daprClient.SaveStateAsync(_daprOptions.StoryName, KeysStation, allStations, cancellationToken: cancellationToken);
+        await _daprClient.SaveStateAsync(_daprOptions.StoryName, KeysStation, stations, cancellationToken: cancellationToken);
     }
 
     public async Task<bool> CacheAirQualityIndexAsync(AirQualityIndexModel airQualityIndex, CancellationToken cancellationToken)
@@ -33,10 +29,10 @@ public class CacheServiceDapr : ICacheService
         throw new NotImplementedException();
     }
 
-    public async Task<List<GiosStationCacheModel>> GetAllStationsAsync(CancellationToken cancellationToken)
+    public async Task<List<StationModel>> GetAllStationsAsync(CancellationToken cancellationToken)
     {
-        var result = await _daprClient.GetStateAsync<List<GiosStationCacheModel>>(_daprOptions.StoryName, KeysStation, cancellationToken: cancellationToken);
-        return result ?? new List<GiosStationCacheModel>();
+        var result = await _daprClient.GetStateAsync<List<StationModel>>(_daprOptions.StoryName, KeysStation, cancellationToken: cancellationToken);
+        return result ?? new List<StationModel>();
     }
 
     public async Task<AirQualityIndexModel?> GetLastAirQualityIndexAsync(long stationId, string airQualityType, CancellationToken cancellationToken)
