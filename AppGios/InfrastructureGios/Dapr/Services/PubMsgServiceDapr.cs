@@ -1,6 +1,7 @@
 ﻿using ApplicationGios.Interfaces;
 using ApplicationGios.Options;
 using Dapr.Client;
+using Microsoft.Extensions.Options;
 using Shareed.Models;
 
 namespace InfrastructureGios.Dapr.Services;
@@ -8,17 +9,18 @@ namespace InfrastructureGios.Dapr.Services;
 public class PubMsgServiceDapr : IPubMsgService
 {
     private readonly DaprClient _daprClient;
-    private readonly DaprOptions _daprOptions;
+    // private readonly DaprOptions _daprOptions;
 
 
-    public PubMsgServiceDapr(DaprClient daprClient, DaprOptions daprOptions)
+    public PubMsgServiceDapr(DaprClient daprClient/*, IOptions<DaprOptions> daprOptions*/)
     {
         _daprClient = daprClient;
-        _daprOptions = daprOptions;
+        // _daprOptions = daprOptions.Value;
     }
 
     public async Task PublishStationAsync(StationModel stationModel, CancellationToken cancellationToken)
     {
-        
+        Console.WriteLine($" ==>> {stationModel.Id}");
+        await _daprClient.PublishEventAsync("pubsub-kafka", "GiosTopic", stationModel, cancellationToken);
     }
 }
