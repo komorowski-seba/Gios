@@ -9,18 +9,16 @@ namespace InfrastructureGios.Dapr.Services;
 public class PubMsgServiceDapr : IPubMsgService
 {
     private readonly DaprClient _daprClient;
-    // private readonly DaprOptions _daprOptions;
+    private readonly DaprOptions _daprOptions;
 
-
-    public PubMsgServiceDapr(DaprClient daprClient/*, IOptions<DaprOptions> daprOptions*/)
+    public PubMsgServiceDapr(DaprClient daprClient, IOptions<DaprOptions> daprOptions)
     {
         _daprClient = daprClient;
-        // _daprOptions = daprOptions.Value;
+        _daprOptions = daprOptions.Value;
     }
 
     public async Task PublishStationAsync(StationModel stationModel, CancellationToken cancellationToken)
     {
-        Console.WriteLine($" ==>> {stationModel.Id}");
-        await _daprClient.PublishEventAsync("pubsub-kafka", "GiosTopic", stationModel, cancellationToken);
+        await _daprClient.PublishEventAsync(_daprOptions.PubsubName, _daprOptions.Topic, stationModel, cancellationToken);
     }
 }

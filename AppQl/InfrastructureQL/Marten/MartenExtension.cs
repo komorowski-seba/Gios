@@ -1,13 +1,13 @@
 ﻿using Application.Interfaces;
 using Application.Options;
-using Infrastructure.Marten.Projections;
-using Infrastructure.Marten.Services;
+using InfrastructureQL.Marten.Projections;
+using InfrastructureQL.Marten.Services;
 using Marten;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Weasel.Core;
 
-namespace Infrastructure.Marten;
+namespace InfrastructureQL.Marten;
 
 public static class MartenExtension
 {

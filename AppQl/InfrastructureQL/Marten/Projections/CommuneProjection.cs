@@ -2,7 +2,7 @@
 using DomainQl.Events;
 using Marten.Events.Aggregation;
 
-namespace Infrastructure.Marten.Projections;
+namespace InfrastructureQL.Marten.Projections;
 
 public class CommuneProjection : SingleStreamAggregation<Commune>
 {

@@ -4,6 +4,7 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <RootNamespace>Infrastructure</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -22,7 +23,11 @@
         <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
         <PackageReference Include="Serilog.Sinks.ElasticSearch" Version="8.4.1" />
         <PackageReference Include="Serilog.Enrichers.Environment" Version="2.2.0" />
-
+        <PackageReference Include="Dapr.AspNetCore" Version="1.9.0" />
+        <PackageReference Include="Dapr.Client" Version="1.9.0" />
+        <PackageReference Include="Dapr.Actors" Version="1.9.0" />
+        <PackageReference Include="Dapr.Actors.AspNetCore" Version="1.9.0" />
+        <PackageReference Include="Dapr.Extensions.Configuration" Version="1.9.0" />
     </ItemGroup>
 
     <ItemGroup>

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Infrastructure.Elastic;
+namespace InfrastructureQL.Elastic;
 
 public static class ElasticExtensions
 {

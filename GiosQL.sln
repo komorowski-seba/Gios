@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "AppQl\Infrastructure\Infrastructure.csproj", "{5B5161BF-AFAB-4A44-AF42-E5B6F26EA782}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfrastructureQL", "AppQl\InfrastructureQL\InfrastructureQL.csproj", "{5B5161BF-AFAB-4A44-AF42-E5B6F26EA782}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{740EDA1E-5BC6-4D8E-A997-4670AAD23342}"
 EndProject

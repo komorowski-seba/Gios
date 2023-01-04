@@ -17,7 +17,7 @@
     
     <ItemGroup>
       <ProjectReference Include="..\ApplicationQL\ApplicationQL.csproj" />
-      <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+      <ProjectReference Include="..\InfrastructureQL\InfrastructureQL.csproj" />
     </ItemGroup>
 
 </Project>

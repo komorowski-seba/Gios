@@ -1,6 +1,6 @@
 ﻿using Application.Interfaces;
 
-namespace Infrastructure.Elastic;
+namespace InfrastructureQL.Elastic;
 
 public class ElasticSearchService : ISearchService
 {

@@ -3,7 +3,7 @@ using DomainQl.Common.Interfaces;
 using Marten;
 using MediatR;
 
-namespace Infrastructure.Marten.Services;
+namespace InfrastructureQL.Marten.Services;
 
 public sealed class MartensEventsStoreDb : IEventsStoreDb
 {

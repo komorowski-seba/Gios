@@ -1,5 +1,6 @@
 using Application;
 using Application.Options;
+using ApplicationGios.Options;
 using Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,14 +9,14 @@ var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 
 services.Configure<MartenOptions>(builder.Configuration.GetSection("Marten"));
-services.Configure<KafkaOptions>(builder.Configuration.GetSection("Kafka"));
+services.Configure<DaprOptions>(builder.Configuration.GetSection("Dapr"));
 services.Configure<ElasticOptions>(builder.Configuration.GetSection("Elastic"));
 
 services.AddControllers();
 services.AddEndpointsApiExplorer();
 services.AddApplicationServices();
 // services.AddSwaggerGen();
-services.AddWebQlInfrastructureServices(builder.Configuration);
+// services.AddWebQlInfrastructureServices(builder.Configuration);
 
 var app = builder.Build();
 // if (app.Environment.IsDevelopment())

@@ -57,21 +57,11 @@ services:
       KAFKA_ADVERTISED_HOST_NAME: 127.0.0.1
       KAFKA_CREATE_TOPICS: 'GiosTopic:1:1'
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    #      KAFKA_ADVERTISED_HOST_NAME: kafka
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     links:
       - zookeeper
-  
-#  kafka:
-#    image: wurstmeister/kafka
-#    container_name: kafka
-#    ports:
-#      - 9092:9092
-#    environment:
-#      KAFKA_ADVERTISED_HOST_NAME: kafka
-#      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-#      KAFKA_CREATE_TOPICS: "orders:1:1"
-#    restart: unless-stopped
     
   redis:
     image: redis:6.2.5
